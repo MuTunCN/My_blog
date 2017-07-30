@@ -1,6 +1,5 @@
 from django.db import models
 from mongoengine import *
-connect("ac_data")
 
 class AcUser(Document):
     isFriend = IntField()
@@ -26,7 +25,7 @@ class AcUser(Document):
     gender = IntField()
     verifiedText = StringField()
     meta = {
-        "collection":"user_info"
+        "collection":"ac_user_info"
     }
 
 # for i in AcUser.objects[:3]:
