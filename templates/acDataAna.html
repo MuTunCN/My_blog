@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block html_content %}
+    <h1>20w的AcFun用户数据分析，没有任何参考价值</h1>
+
+    <div class="ui two top attached buttons">
+        <div class="ui green basic button" onclick="{lvl()}">等级分布</div>
+        <div class="ui blue basic button" onclick="{gender()}">性别分布</div>
+    </div>
+    <div class="ui attached segment">
+      <div id="container" style="min-width: 400px;height: 400px;"></div>
+    </div>
+    <div class="ui two bottom attached buttons">
+        <div class="ui black basic button" onclick="{au()}">活跃用户分布</div>
+      <div class="ui teal basic button" onclick="{re()}">注册年份分布</div>
+    </div>
+{% endblock %}
+{% block js_content %}
+$(lvl());
+function lvl() {
+    $('#container').highcharts({
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'A站等级分布情况'
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: '人'
+        },
+        credits: {
+            enabled: false
+        },
+        plotOptions: {
+            areaspline: {
+                fillOpacity: 0.5
+            }
+        },
+        series: [{
+    "name":"在这个等级范围的用户数",
+    "type":"pie",
+    "data":{{ lvl_data|safe }}
+}]
+    });
+}
+function gender() {
+    $('#container').highcharts({
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'A站性别分布情况'
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: '人'
+        },
+        credits: {
+            enabled: false
+        },
+        plotOptions: {
+            areaspline: {
+                fillOpacity: 0.5
+            }
+        },
+        series: [{
+    "name":"该性别人数",
+    "type":"pie",
+    "data":{{ gender_data|safe }}
+}]
+    });
+}
+function au() {
+    $('#container').highcharts({
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'A站活跃用户分布情况'
+        },
+    "subtitle":{"text":"活跃用户指最后一次登陆在2017年3月后"},
+        tooltip: {
+            shared: true,
+            valueSuffix: '人'
+        },
+        credits: {
+            enabled: false
+        },
+        plotOptions: {
+            areaspline: {
+                fillOpacity: 0.5
+            }
+        },
+        series: [{
+    "name":"人数",
+    "type":"pie",
+    "data":{{ au_data|safe }}
+}]
+    });
+}
+function re() {
+    $('#container').highcharts({
+        'title'   : {'text': 'A站注册年份分布'},
+    'xAxis': {'categories': {{ re_data_index|safe }} },
+    'yAxis': {'title': {'text': '注册量','align': 'high'}} ,
+    'tooltip': {'valueSuffix': ' 人'},
+        'credits': {
+            'enabled': false
+        },
+        'plotOptions': {
+            'areaspline': {
+                'fillOpacity': 0.5
+            }
+        },
+        series: [{
+    'type': 'bar',
+    'data': {{ re_data|safe }}
+}]
+    });
+}
+{% endblock %}

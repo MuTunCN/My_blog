@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A Awesome web</title>
+    <link rel="stylesheet" href="{% static "static/css/semantic.css" %}">
+    <script src="{% static 'static/js/jquery.min.js' %}" charset="utf-8"></script>
+    <script src="{% static 'static/js/semantic.js' %}" charset="utf-8"></script>
+    <script src="{% static 'static/js/Highcharts.js' %}" charset="utf-8"></script>
+  </head>
+  <body>
+    <!-- sidebar -->
+    <div class="ui thin left visible sidebar inverted vertical menu">
+      <a href="" class="item">
+        文章
+      </a>
+      <a href="" class="item">
+        项目
+      </a>
+      <a href="" class="item">
+        统计
+      </a>
+    </div>
+    <!-- pusher -->
+    <div class="pusher">
+      <!-- menu -->
+      <div class="ui pointing menu">
+        <a href="#" class="active item">home</a>
+        <a href="#" class="item">item</a>
+        <a href="#" class="item">item</a>
+        <div class="right menu">
+          <div class="item">
+            <div class="ui transparent icon input">
+              <input type="text" name="" value="" placeholder="Search">
+              <i class="search link icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- container -->
+      <div class="ui container" style="padding-right: 10%">
+        {% block html_content%}
+          {% endblock %}
+      </div>
+
+    </div>
+    <script>
+        {% block js_content %}
+        {% endblock %}
+    </script>
+  </body>
+</html>
