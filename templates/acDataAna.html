@@ -100,20 +100,27 @@ function au() {
 }
 function re() {
     $('#container').highcharts({
-        'title'   : {'text': 'A站注册年份分布'},
-    'xAxis': {'categories': {{ re_data_index|safe }} },
-    'yAxis': {'title': {'text': '注册量','align': 'high'}} ,
-    'tooltip': {'valueSuffix': ' 人'},
-        'credits': {
-            'enabled': false
+       chart: {
+            type: 'pie'
         },
-        'plotOptions': {
-            'areaspline': {
-                'fillOpacity': 0.5
+        title: {
+            text: 'A站注册年份分布情况'
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: '人'
+        },
+        credits: {
+            enabled: false
+        },
+        plotOptions: {
+            areaspline: {
+                fillOpacity: 0.5
             }
         },
         series: [{
-    'type': 'bar',
+    "name":"人数",
+    "type":"pie",
     'data': {{ re_data|safe }}
 }]
     });

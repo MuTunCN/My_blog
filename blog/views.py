@@ -12,14 +12,11 @@ def ac_data_ana(request):
     gender_data = get_gender_data()
     au_data = get_au_data()
     re_data = get_re_data()
-    re_data_index = re_data[1]
-    re_datas = re_data[0]
     content = {
         "lvl_data": lvl_data,
         "gender_data": gender_data,
         "au_data": au_data,
-        "re_data":re_datas,
-        "re_data_index":re_data_index
+        "re_data":re_data
     }
     return render(request, "acDataAna.html", content)
 
@@ -44,7 +41,8 @@ def get_re_data():
     #     return num
     #
     # return list(map(get_year_num, [i for i in data_index])), data_index
-    return  [251, 15920, 41765, 35883, 173833, 333], [2007, 2008, 2013, 2014, 2015, 2016]
+    # return  [251, 15920, 41765, 35883, 173833, 333], [2007, 2008, 2013, 2014, 2015, 2016]
+    return [['2007', 251], ['2008', 15920], ['2013', 41765], ['2014', 35883], ['2015', 173833], ['2016', 333]]
 
 def get_au_data():
     """分析活跃用户 活跃用户指最后一次登陆在2017年3月后"""
