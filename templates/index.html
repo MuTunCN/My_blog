@@ -1,34 +1,33 @@
 {% extends "base.html" %}
 {% block html_content %}
-    <div class="ui two column grid container">
-          <div class="column">
-            <div class="ui green segment container">
-              111
-            </div>
-          </div>
-          <div class="column">
-            <div class="ui blue segment container">
-              222
-            </div>
-          </div>
-        </div>
+
         <div class="ui divided items">
+        {% for post in post_list %}
           <div class="item">
             <div class="image">
               <img src="https://semantic-ui.com/images/wireframe/image.png">
             </div>
             <div class="content">
-              <a class="header">title here</a>
+              <a class="header" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
               <div class="meta">
-                <span class="cinema">update here</span>
+                <span class="cinema left">创建时间：{{ post.created_time }}</span>
+                <span class="cinema right">最后更新时间：{{ post.modified_time }}</span>
+                <span class="cinema right">作者：{{ post.author }}</span>
               </div>
               <div class="description">
-                <p>something here</p>
+                <p>描述：{{ post.excerpt }}</p>
               </div>
               <div class="extra">
-                <div class="ui label">IMAX</div>
+                <div class="ui label">AIMX</div>
               </div>
             </div>
           </div>
+            {% empty %}
+            <div>
+            <p>
+                没有文章
+            </p>
+            </div>
+        {% endfor %}
         </div>
 {% endblock %}
