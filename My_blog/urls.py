@@ -17,11 +17,13 @@ from django.conf.urls import url, include
 from django.contrib import admin
 # from blog.views import index, ac_data_ana
 from blog import views
-app_name = 'blogs'
+app_name = 'blog'
 urlpatterns = [
-    # url(r'^admin/', admin.site.urls),
-    url(r'', views.index,include("My_blog.urls", namespace='blogs') ,name='index'),
-    # url(r'^acData/', views.ac_data_ana, name='ac_data_ana'),
-    url(r'^post/(?P<pk>[0-9]+/)', views.detail, name='detail'),
+    url(r'^admin/', admin.site.urls),
+    url(r'^$', views.index, name='index'),
+    url(r'^add/', views.add, name='add'),   #add/?a=3&b=4 7
+    url(r'^add2/(\d+)/(\d+)', views.add2, name='add2'), #add2/3/4 7
+    url(r'^acData/', views.ac_data_ana, name='ac_data_ana'),
+    url(r'^post/(?P<pk>[0-9]+)', views.detail, name='detail'),
 
 ]

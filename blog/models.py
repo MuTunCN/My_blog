@@ -31,7 +31,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blogs:detail', kwargs={"pk": self.pk})
+        return reverse('detail', kwargs={"pk": self.pk})
 #from mongoengine import *
 # mongoDB
 # class AcUser(Document):

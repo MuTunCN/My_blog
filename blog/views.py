@@ -1,13 +1,33 @@
 from django.shortcuts import render
 # from blog.models import AcUser
 import time
+import markdown
+from django.http import HttpResponse
 from blog.models import Post
 from django.shortcuts import render, get_object_or_404
 
 
 def detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    post.body = markdown.markdown(post.body,
+                                  extensions=[
+                                     'markdown.extensions.extra',
+                                     'markdown.extensions.codehilite',
+                                     'markdown.extensions.toc',
+                                  ])
     return render(request, 'detail.html', context={'post': post})
+
+
+def add(request):
+    a = request.GET['a']
+    b = request.GET['b']
+    c = int(a) + int(b)
+    return HttpResponse(str(c))
+
+
+def add2(request, a, b):
+    c = int(a) + int(b)
+    return HttpResponse(str(c))
 
 
 def index(request):
