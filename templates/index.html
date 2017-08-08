@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load blog_tags %}
 {% block html_content %}
 
         <div class="ui divided items">
@@ -30,4 +31,8 @@
             </div>
         {% endfor %}
         </div>
+    {% get_newest_post as npost %}
+    {% for post in npost %}
+    <h1>{{ post.title }}</h1>
+    {% endfor %}
 {% endblock %}
