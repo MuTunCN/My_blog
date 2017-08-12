@@ -9,7 +9,7 @@ from django.shortcuts import render, get_object_or_404
 
 def detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    post.body = markdown.markdown(post.body, [
+    post.body = markdown.markdown(post.body, extensions=[
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',
         'markdown.extensions.toc',

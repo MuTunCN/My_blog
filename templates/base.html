@@ -1,4 +1,4 @@
-{% load static %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,6 +6,7 @@
     <title>A Awesome web</title>
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.11/semantic.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static "css/github.css" %}">
+    <link rel="stylesheet" href="{% static "css/github-markdown.css" %}">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/semantic-ui/2.2.11/semantic.js"></script>
       <script src="https://cdn.bootcss.com/highcharts/5.0.14/highcharts.js"></script>
@@ -41,7 +42,7 @@
         </div>
       </div>
       <!-- container -->
-      <div class="ui text container" style="padding-right: 10%">
+      <div class="ui text container markdown-body" style="padding-right: 10%">
         {% block html_content%}
           {% endblock %}
       </div>
