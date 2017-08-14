@@ -3,7 +3,7 @@ from django.shortcuts import render
 import time
 import markdown
 from django.http import HttpResponse
-from blog.models import Post
+from blog.models import Post, Category
 from django.shortcuts import render, get_object_or_404
 
 
@@ -17,16 +17,24 @@ def detail(request, pk):
     return render(request, 'detail.html', context={'post': post})
 
 
-def add(request):
-    a = request.GET['a']
-    b = request.GET['b']
-    c = int(a) + int(b)
-    return HttpResponse(str(c))
+def category(request, cate_name):
+    cate = get_object_or_404(Category, name=cate_name)
+    posts = Post.objects.filter(category=cate).order_by("-created_time")
+    content = {
+        'post_list': posts
+    }
+    return render(request, "index.html", content)
 
-
-def add2(request, a, b):
-    c = int(a) + int(b)
-    return HttpResponse(str(c))
+# def add(request):
+#     a = request.GET['a']
+#     b = request.GET['b']
+#     c = int(a) + int(b)
+#     return HttpResponse(str(c))
+#
+#
+# def add2(request, a, b):
+#     c = int(a) + int(b)
+#     return HttpResponse(str(c))
 
 
 def index(request):

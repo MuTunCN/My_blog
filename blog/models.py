@@ -26,6 +26,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, blank=True)
     author = models.ForeignKey(User)
+    pic = models.CharField(max_length=200, default="https://semantic-ui.com/images/wireframe/image.png")
 
     def __str__(self):
         return self.title
