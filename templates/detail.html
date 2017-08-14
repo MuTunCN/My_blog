@@ -1,5 +1,24 @@
 {% extends 'base.html' %}
+{% block menu %}
+ <a href="/" class="item">首页</a>
+
+    <a href="{% url "category" "article" %}" class="item">文章随笔</a>
+    <a href="{% url 'category' 'project' %}" class="item">个人项目</a>
+<a href="/statistics" class=" item">网站数据统计</a>
+{% endblock %}
 {% block html_content %}
-    <h1>{{ post.title }}</h1>
+    <h1 class="ui header ">{{ post.title }}</h1>
+    <div class="ui two column  center  grid ">
+        <div class="column">
+        <h5 >作者：{{ post.author }}</h5>
+    </div>
+
+        <div class="column">
+            <h5 >浏览量：{{ post.views }}</h5>
+        </div>
+    </div>
+    <div class="ui divider"></div>
+
+
     {{ post.body|safe }}
 {% endblock %}

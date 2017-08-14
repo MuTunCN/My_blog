@@ -27,6 +27,11 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     author = models.ForeignKey(User)
     pic = models.CharField(max_length=200, default="https://semantic-ui.com/images/wireframe/image.png")
+    views = models.PositiveIntegerField(default=0)
+
+    def increase_views(self):
+        self.views += 1
+        self.save(update_fields=['views'])
 
     def __str__(self):
         return self.title

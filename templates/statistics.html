@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block menu %}
+ <a href="/" class="item">首页</a>
+
+    <a href="{% url "category" "article" %}" class="item">文章随笔</a>
+    <a href="{% url 'category' 'project' %}" class="item">个人项目</a>
+<a href="/statistics" class=" active item">网站数据统计</a>
+{% endblock %}
+{% block html_content %}
+
+{% endblock %}

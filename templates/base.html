@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>A Awesome web</title>
+    <title>How you doin?</title>
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.11/semantic.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static "css/github.css" %}">
     <link rel="stylesheet" href="{% static "css/github-markdown.css" %}">
@@ -13,25 +13,25 @@
   </head>
   <body>
     <!-- sidebar -->
-    <div class="ui thin left visible sidebar inverted vertical menu">
-      <a href="" class="item">
-        文章
-      </a>
-      <a href="" class="item">
-        项目
-      </a>
-      <a href="" class="item">
-        统计
-      </a>
+    <div class="ui left visible sidebar inverted vertical menu">
+
+
+  <div class="ui container">
+    <img class="ui circular image" src="http://ouo5mf805.bkt.clouddn.com/image/web/logo.jpg?e=1502709639&token=BeHCE1SRGcY-55deiTmLLB5jnFT4HBwO1nkfxKL2:Zdb8fu9WVkspJiVIfHMbRBo5bDs" width="200px" height="200px" style="margin:20px">
+  </div>
+
+
+
     </div>
     <!-- pusher -->
     <div class="pusher">
       <!-- menu -->
       <div class="ui pointing menu">
-        <a href="/" class="active item">首页</a>
-        <a href="{% url "category" "article" %}" class="item">文章随笔</a>
-        <a href="{% url 'category' 'project' %}" class="item">个人项目</a>
-        <a href="/statistics" class="item">网站数据统计</a>
+      {% block menu %}
+
+
+
+      {% endblock %}
         <div class="right menu">
           <div class="item">
             <div class="ui transparent icon input">

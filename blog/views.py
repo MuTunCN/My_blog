@@ -9,6 +9,7 @@ from django.shortcuts import render, get_object_or_404
 
 def detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    post.increase_views()
     post.body = markdown.markdown(post.body, extensions=[
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',
@@ -17,11 +18,17 @@ def detail(request, pk):
     return render(request, 'detail.html', context={'post': post})
 
 
+def statistics(request):
+
+    return render(request, "statistics.html")
+
+
 def category(request, cate_name):
     cate = get_object_or_404(Category, name=cate_name)
     posts = Post.objects.filter(category=cate).order_by("-created_time")
     content = {
-        'post_list': posts
+        'post_list': posts,
+        'cate': cate.name
     }
     return render(request, "index.html", content)
 
@@ -40,7 +47,8 @@ def category(request, cate_name):
 def index(request):
     post_list = Post.objects.all().order_by('-created_time')    #创建时间倒叙
     content = {
-        'post_list': post_list
+        'post_list': post_list,
+        'cate':"index"
     }
     return render(request, "index.html", content)
 
