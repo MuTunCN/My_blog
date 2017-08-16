@@ -17,6 +17,15 @@ class Tag(models.Model):
         return self.name
 
 
+class DayView(models.Model):
+    date = models.DateTimeField()
+    arti_views = models.PositiveIntegerField(default=0)
+    proj_views = models.PositiveIntegerField(default=0)
+    o_aViews = models.PositiveIntegerField(default=0)
+    o_pViews = models.PositiveIntegerField(default=0)
+    running_time = models.PositiveIntegerField(default=0)
+
+
 class Post(models.Model):
     title = models.CharField(max_length=70)
     body = models.TextField()

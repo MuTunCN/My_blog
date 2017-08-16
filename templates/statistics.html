@@ -7,5 +7,94 @@
 <a href="/statistics" class=" active item">网站数据统计</a>
 {% endblock %}
 {% block html_content %}
+    <div class="ui grid">
+{#    总点击量#}
+        <div class="five wide column">
+            <div class="ui center aligned red  segment">
 
+                <div class="ui huge statistic">
+                    <div class="value">
+                        {{ views }}
+                    </div>
+                    <div class="label">
+                        文章总浏览量
+                    </div>
+                </div>
+            </div>
+        </div>
+{#        文章数#}
+        <div class="four wide column">
+            <div class="ui center aligned blue  segment">
+
+                <div class="ui huge statistic">
+                    <div class="value">
+                        {{ arti_count }}
+                    </div>
+                    <div class="label">
+                        文章数
+                    </div>
+                </div>
+            </div>
+        </div>
+{#        项目数#}
+        <div class="four wide column">
+            <div class="ui center aligned orange  segment">
+                <div class="ui huge statistic">
+                    <div class="value">
+                        {{ proj_count }}
+                    </div>
+                    <div class="label">
+                        项目数
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sixteen wider column">
+            <div id="container"  style="height: 600px;width: 900px"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block js_content %}
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '浏览量分布图'
+        },
+        xAxis: {
+            categories: {{ time }}
+        },
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: '天数'
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                    this.series.name + ': ' + this.y + '<br/>' +
+                    '总量: ' + this.point.stackTotal;
+            }
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+        },
+        series: [{
+            name: '项目浏览量',
+            data: {{ pr_v }},
+            stack: 'male'
+        }, {
+            name: '文章浏览量',
+            data: {{ ar_v }},
+            stack: 'male'
+        }]
+    });
+});
 {% endblock %}

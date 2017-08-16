@@ -3,9 +3,9 @@ from django.shortcuts import render
 import time
 import markdown
 from django.http import HttpResponse
-from blog.models import Post, Category
+from blog.models import Post, Category, DayView
 from django.shortcuts import render, get_object_or_404
-
+from django.db.models.aggregates import Count, Sum
 
 def detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -19,8 +19,27 @@ def detail(request, pk):
 
 
 def statistics(request):
-
-    return render(request, "statistics.html")
+    cates = Category.objects.annotate(count=Count('post'))
+    for cate in cates:
+        if cate.name == 'article':
+            arti_views = Post.objects.filter(category=cate).aggregate(sum=Sum('views'))["sum"]
+            arti_count = cate.count
+        elif cate.name == 'project':
+            proj_views = Post.objects.filter(category=cate).aggregate(sum=Sum('views'))["sum"]
+            proj_count = cate.count
+    dv = DayView.objects.all()
+    time = [t.running_time for t in dv]
+    ar_v = [arv.arti_views for arv in dv]
+    pr_v = [prv.proj_views for prv in dv]
+    content = {
+        'arti_count': arti_count,
+        'proj_count': proj_count,
+        'views': arti_views + proj_views,
+        'time': time,
+        'ar_v': ar_v,
+        'pr_v': pr_v
+    }
+    return render(request, "statistics.html", content)
 
 
 def category(request, cate_name):
