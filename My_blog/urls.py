@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^statistics/', views.statistics, name='statistics'),
     url(r'^post/(?P<pk>[0-9]+)', views.detail, name='detail'),
     url(r'^(?P<cate_name>[\w]+)/', views.category, name='category'),
+    url(r'^(?P<tag_name>[\w]+)', views.tag, name='tag'),
 
 ]

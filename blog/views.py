@@ -3,7 +3,7 @@ from django.shortcuts import render
 import time
 import markdown
 from django.http import HttpResponse
-from blog.models import Post, Category, DayView
+from blog.models import Post, Category, DayView, Tag
 from django.shortcuts import render, get_object_or_404
 from django.db.models.aggregates import Count, Sum
 
@@ -51,6 +51,14 @@ def category(request, cate_name):
     }
     return render(request, "index.html", content)
 
+
+def tag(request, tag_name):
+    my_tag = get_object_or_404(Tag, name=tag_name)
+    posts = Post.objects.filter(tags__name__contains=my_tag).order_by('-created_time')
+    content ={
+        'post_list': posts
+    }
+    return render(request, 'index.html', content)
 
 
 def index(request):

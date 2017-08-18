@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load blog_tags %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,33 +17,53 @@
     <div class="ui left visible sidebar inverted vertical menu">
 
 
-  <div class="ui container">
-    <img class="ui circular image" src="http://ouo5mf805.bkt.clouddn.com/image/web/logo.jpg?e=1502709639&token=BeHCE1SRGcY-55deiTmLLB5jnFT4HBwO1nkfxKL2:Zdb8fu9WVkspJiVIfHMbRBo5bDs" width="200px" height="200px" style="margin:20px">
+  <div class="ui container" style="min-height: 100%;margin-bottom: -100px">
+    <a href="/">
+      <img class="ui circular image" src="http://ouo5mf805.bkt.clouddn.com/image/web/logo.jpg?e=1502709639&token=BeHCE1SRGcY-55deiTmLLB5jnFT4HBwO1nkfxKL2:Zdb8fu9WVkspJiVIfHMbRBo5bDs" width="200px" height="200px" style="margin:20px">
+    </a>
+
+ <div class="ui center aligned inverted segment">
+     <div class="ui buttons">
+        <a href="{% url 'category' 'project' %}"><div class="ui inverted blue basic button">项目 </div></a>
+         <a href="/statistics"><div class="or"></div></a>
+         <a href="{% url 'category' 'article' %}"><div class="ui inverted red basic button">文章</div></a>
+     </div>
   </div>
+<div class="ui horizontal inverted divider">
+  <i class="tags icon"></i> 标签
+</div>
+
+    <div class="ui  labels" style="text-align: center">
+        {% get_all_tags as tags %}
+        {% for tag in tags %}
+  <a href="{% url 'tag' tag.name %}">
+    <div class="mini ui inverted basic button">{{ tag.name }}</div>
+  </a>
+        {% endfor %}
+    </div>
+      <div style="height: 100px"></div>
+  </div>
+<div class="ui inverted container" >
+    <div class="ui horizontal inverted divider">
+  联系我<i class="angellist icon"></i>
+</div>
+    <div class="ui center aligned  container">
+        <a href="https://github.com/MuTunCN" target="_blank"> <i class="inverted big github icon"></i></a>
+        <a href="https://www.instagram.com/mutun95/" target="_blank" > <i class="big inverted  instagram icon"></i></a>
+        <i class="disabled big inverted  qq icon"></i>
+        <i class="disabled big inverted  mail outline icon"></i>
+        <a href="http://weibo.com/u/2447902484?is_all=1" target="_blank"> <i class="big inverted  weibo icon"></i></a>
+        <i class="disabled big inverted  stack overflow icon"></i>
+    </div>
+</div>
 
 
 
     </div>
     <!-- pusher -->
     <div class="pusher">
-      <!-- menu -->
-      <div class="ui pointing menu">
-      {% block menu %}
-
-
-
-      {% endblock %}
-        <div class="right menu">
-          <div class="item">
-            <div class="ui transparent icon input">
-              <input type="text" name="" value="" placeholder="Search">
-              <i class="search link icon"></i>
-            </div>
-          </div>
-        </div>
-      </div>
       <!-- container -->
-      <div class="ui left aligned container markdown-body">
+      <div class=" markdown-body" style="margin-top: 20px;margin-left: 20px">
         {% block html_content%}
           {% endblock %}
       </div>
