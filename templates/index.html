@@ -15,8 +15,8 @@
         <div class="ui divided items">
         {% for post in post_list %}
           <div class="item">
-            <div class="image">
-              <img src="{{ post.pic }}">
+            <div class="ui small image">
+              <img class="ui image" src="{{ post.pic }}">
             </div>
             <div class="content">
               <a class="header" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
